@@ -90,10 +90,10 @@ WSGI_APPLICATION = 'social_media_api.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'mydatabase',
-        'USER': 'OSAS',
-        'PASSWORD': 'Nagastic11@#',
-        'HOST': 'root',
+        'NAME': 'osas',
+        'USER': 'osas',
+        'PASSWORD': 'osas1234',
+        'HOST': 'localhost',
         'PORT': '5432',
     }
 }
