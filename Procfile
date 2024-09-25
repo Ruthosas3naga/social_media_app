@@ -1,1 +1,2 @@
-web: gunicorn social_media_api.wsgi --log-file -
+web: python app.py
+

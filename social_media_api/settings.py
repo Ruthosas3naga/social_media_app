@@ -143,3 +143,4 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'accounts.CustomUser'
+ALLOWED_HOSTS = ['social-media22-f82f75478abc.herokuapp.com', 'localhost', '127.0.0.1']
