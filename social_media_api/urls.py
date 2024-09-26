@@ -23,7 +23,8 @@ urlpatterns = [
     path('', views.home, name='home'),
     path('admin/', admin.site.urls),    # Admin URL
     path('api/accounts/', include('accounts.urls')),  # API paths for accounts
-    path('api/posts/', include('posts.urls')), 
+    path('api/posts/', include('posts.urls')),
+    path('api/notifications/', include('notifications.urls')),
     # API paths for posts
 ]
 
