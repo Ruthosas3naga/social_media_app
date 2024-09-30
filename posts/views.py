@@ -50,7 +50,6 @@ class FeedView(generics.ListAPIView):
     
     permission_classes = [permissions.IsAuthenticated]
 
-    from notifications.models import Notification
 
 class LikePostView(APIView):
     permission_classes = [IsAuthenticated]
@@ -75,6 +74,14 @@ class LikePostView(APIView):
 
         return Response({"detail": "Post liked successfully."}, status=status.HTTP_201_CREATED)
 
+    def get(self, request, pk):
+        post = generics.get_object_or_404(Post, pk=pk)
+        likes = Like.objects.filter(post=post)
+        like_data = [{"user": like.user.username, "post": like.post.id} for like in likes]
+        
+        return Response({"likes": like_data}, status=status.HTTP_200_OK)
+
+
 class UnlikePostView(APIView):
     permission_classes = [IsAuthenticated]
 
@@ -88,3 +95,12 @@ class UnlikePostView(APIView):
             return Response({"detail": "Post unliked successfully."}, status=status.HTTP_204_NO_CONTENT)
         except Like.DoesNotExist:
             return Response({"detail": "You have not liked this post."}, status=status.HTTP_400_BAD_REQUEST)
+
+    def get(self, request, pk):
+        post = generics.get_object_or_404(Post, pk=pk)
+        likes = Like.objects.filter(post=post, user=request.user)
+
+        if not likes.exists():
+            return Response({"detail": "You have not liked this post."}, status=status.HTTP_404_NOT_FOUND)
+
+        return Response({"detail": f"You liked post {pk}"}, status=status.HTTP_200_OK)
